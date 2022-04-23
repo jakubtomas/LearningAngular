@@ -1,0 +1,9 @@
+<p>tasks works!</p>
+<div class="left">
+  <input type="text" placeholder="name" #name />
+  <input type="text" placeholder="text" #text />
+
+  <button (click)="addTutorial(name.value, text.value)">Add a Tutorial</button>
+</div>
+
+<app-list></app-list>
