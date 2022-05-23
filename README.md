@@ -1,4 +1,4 @@
-# Ngxs learn, ChangeDetectionStrategy, Reactive Forms , Yee Interceptor but I did not create 
+# Ngxs learn, ChangeDetectionStrategy, Reactive Forms , Yee Interceptor but I did not create , Error Handling 
 
 # Ngxs
 
