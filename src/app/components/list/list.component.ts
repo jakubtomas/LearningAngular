@@ -24,5 +24,5 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  /// redux devtools install 
 }

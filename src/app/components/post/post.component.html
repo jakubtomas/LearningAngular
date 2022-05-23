@@ -1,0 +1,23 @@
+<p>post works!</p>
+
+<div class="left">
+  <input type="text" placeholder="name" #name />
+
+  <button (click)="addPost(name.value)">Add Number</button>
+</div>
+
+<br />
+<br />
+<div class="right">
+  <h3>Posts</h3>
+
+  <!-- <li (click)="removeItem(item.name)" *ngFor="let item of posts$ | async"> -->
+  <div *ngFor="let item of posts$ | async">
+    <div class="box">
+      id <em>{{ item.id }}</em> userId <em>{{ item.userId }}</em> Title
+      <h5>{{ item.title }}</h5>
+      body
+      <p>{{ item.body }}</p>
+    </div>
+  </div>
+</div>

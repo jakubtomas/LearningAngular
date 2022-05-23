@@ -6,13 +6,17 @@ import { Observable } from "rxjs";
 // Section 2
 export class ItemStateModel {
   items: Item[] = [];
+  valueA: string = '';
+  valueB: string = '';
 }
 
 // Section 3
 @State<ItemStateModel>({
   name: 'items',
   defaults: {
-    items: []
+    items: [],
+    valueA: 'asdfasdf',
+    valueB: 'sdfgsdfg',
   }
 })
 
@@ -29,6 +33,7 @@ export class ItemState {
   add({ getState, patchState }: StateContext<ItemStateModel>, { payload }: AddItem) {
     const state = getState();
     patchState({
+      ...state,
       items: [...state.items, payload]
     })
   }
@@ -39,9 +44,24 @@ export class ItemState {
   // remove Item
   @Action(RemoveItem)
   removeItem({ getState, patchState }: StateContext<ItemStateModel>, { payload }: RemoveItem) {
-    // const state = getState();
+    //const state = getState();
     patchState({
       items: getState().items.filter(a => a.name != payload)
     })
   }
+
+  // feedAnimals2(ctx: StateContext<ZooStateModel>, action: FeedAnimals) {
+  //   return this.animalService.feed(action.animalsToFeed).pipe(
+  //     tap(animalsToFeedResult => {
+  //       const state = ctx.getState();
+  //       ctx.patchState({
+  //         feedAnimals: [...state.feedAnimals, animalsToFeedResult]
+  //       });
+  //     }),
+  //     mergeMap(() => ctx.dispatch(new TakeAnimalsOutside()))
+  //   );
+
+
+
+
 }

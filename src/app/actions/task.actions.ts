@@ -7,6 +7,12 @@ export class AddItem {
   constructor(public payload: Item) { }
 }
 
+export class AddItem2 {
+  static readonly type = '[Item] Add'
+
+  constructor(public payload: Item) { }
+}
+
 export class RemoveItem {
   static readonly type = '[TUTORIAL] Remove'
 

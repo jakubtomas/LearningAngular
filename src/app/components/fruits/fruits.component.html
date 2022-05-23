@@ -1,0 +1,11 @@
+<p>fruits Parent Component!</p>
+
+{{ componentReload() }}
+
+<div class="fruits">
+  <button (click)="triggerFunction()">Button</button>
+</div>
+
+<!-- <fruit [fruit]="fruits[0]"></fruit> -->
+
+<fruit *ngFor="let fruit of fruits" [fruit]="fruit"> </fruit>

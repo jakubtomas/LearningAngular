@@ -1,5 +1,5 @@
 <p>list works!</p>
-<div class="right" *ngIf="items$">
+<div class="right">
   <h3>Items</h3>
   <ul>
     <li (click)="removeItem(item.name)" *ngFor="let item of items$ | async">
