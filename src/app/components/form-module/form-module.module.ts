@@ -5,20 +5,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 
 @NgModule({
   declarations: [
-    FormularComponent
+    FormularComponent,
+    RegistrationComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    //AppRoutingModule,
     BrowserAnimationsModule
+    //AppRoutingModule,
   ]
 
 })

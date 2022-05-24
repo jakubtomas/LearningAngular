@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DemoChComponent } from './components/demo-ch/demo-ch.component';
 import { FormularComponent } from './components/form-module/formular/formular.component';
+import { RegistrationComponent } from './components/form-module/registration/registration.component';
 import { FormComponent } from './components/form/form.component';
 import { FruitsComponent } from './components/fruits/fruits.component';
 import { PostComponent } from './components/post/post.component';
@@ -14,8 +15,9 @@ const routes: Routes = [
   { path: 'demo', component: DemoChComponent },
   { path: 'fruits', component: FruitsComponent },
   { path: 'form', component: FormComponent },
-  { path: 'formular', component: FormularComponent },
 
+  { path: 'formular', component: FormularComponent },
+  { path: 'registration', component: RegistrationComponent },
 ];
 
 @NgModule({

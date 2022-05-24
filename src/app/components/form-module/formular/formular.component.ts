@@ -8,33 +8,36 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, Valid
 })
 export class FormularComponent implements OnInit {
 
-  userForm: FormGroup;
+  // userForm: FormGroup;
+  userForm = this.formBuilder.group({
+    name: ['', [Validators.required,
+    Validators.minLength(4),
+    Validators.maxLength(8)]],
+
+    email: ['', [Validators.required,
+    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+
+    phone: ['', [Validators.required]],
+
+    password: ['', [Validators.required,
+    Validators.minLength(8),
+    this.createPasswordStrengthValidator()]],
+
+    password2: ['', [Validators.required]],
+
+    message: ['', [Validators.required]]
+
+  }
+    , this.passwordMatchValidator // viem poslat objekt
+  )
   constructor(public formBuilder: FormBuilder) {
-    this.userForm = this.formBuilder.group({
-      name: ['', [Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(8)]],
 
-      email: ['', [Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-
-      phone: ['', [Validators.required]],
-
-      password: ['', [Validators.required,
-      Validators.minLength(8),
-      this.createPasswordStrengthValidator()]],
-
-      message: ['', [Validators.required]]
-    })
   }
 
   ngOnInit(): void {
-    // this.userForm = this.formBuilder.group({
-    //   name: ['', [Validators.required, Validators.minLength(4)]],
-    //   email: ['', [Validators.required]],
-    //   phone: ['', [Validators.required]],
-    //   message: ['', [Validators.required]]
-    // })
+    this.getControl.message.disable();
+    // pre disable nastavi validaciu true ,, je to bez chyby
+    // nepouzije validatori
   }
 
   get getControl() {
@@ -45,13 +48,15 @@ export class FormularComponent implements OnInit {
     console.log('click');
     console.log(data);
 
-    console.log(this.userForm);
   }
 
   createPasswordStrengthValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
 
       const value = control.value;
+
+      console.log(' Strength Validator value ' + value);
+
 
       if (!value) {
         return null;
@@ -67,5 +72,30 @@ export class FormularComponent implements OnInit {
 
       return !passwordValid ? { passwordStrength: true } : null;
     }
+  }
+
+  private passwordMatchValidator(model: FormGroup): ValidationErrors | null {
+
+    const password = model.get('password');
+    const password2 = model.get('password2');
+
+    if (!password || !password2) {
+      return null;
+    }
+
+    if (password.dirty || password2.dirty) {
+
+      if (password.value !== password2.value) {
+        const errorMismatch = { mismatch: true };
+        password2.setErrors(errorMismatch);
+        return errorMismatch;
+
+      } else {
+        password2.setErrors(null);
+        return null;
+      }
+    }
+
+    return null;
   }
 }
