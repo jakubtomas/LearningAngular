@@ -6,13 +6,17 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
+import { FormArrayComponent } from './form-array/form-array.component';
+import { FarrayTwoComponent } from './farray-two/farray-two.component';
 
 
 
 @NgModule({
   declarations: [
     FormularComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    FormArrayComponent,
+    FarrayTwoComponent
   ],
   imports: [
     CommonModule,

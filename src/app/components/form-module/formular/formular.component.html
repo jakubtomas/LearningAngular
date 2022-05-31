@@ -1,5 +1,5 @@
 <div class="content">
-  <h2 class="mb-5 text-center">Angular Form Validation Example</h2>
+  <h2 class="mb-5 text-center">Formular.component.html</h2>
   <p>
     <a
       href="https://remotestack.io/angular-reactive-forms-validation-tutorial-example/"
@@ -19,11 +19,11 @@
         class="text-danger"
       >
         <div *ngIf="getControl.name.errors?.required">Name is required.</div>
-        <div *ngIf="getControl.name.errors?.maxLength">
-          Maximum character is 8
+        <div *ngIf="getControl.name.errors?.maxlength">
+          Maximum character is 8.
         </div>
         <div *ngIf="getControl.name.errors?.minlength">
-          Minimum 4 character are required.
+          Minimum 4 character are srequired.
         </div>
       </div>
     </div>
@@ -51,6 +51,12 @@
         class="text-danger"
       >
         <div *ngIf="getControl.phone.errors?.required">Phone is required.</div>
+        <div *ngIf="getControl.phone.errors?.pattern">
+          Invalid phone number. Only number idiot.
+        </div>
+        <div *ngIf="getControl.phone.errors?.minlength">
+          Minimum 10 character are required.
+        </div>
       </div>
     </div>
 
@@ -79,7 +85,7 @@
     </div>
 
     <div class="form-group">
-      <label>Password</label>
+      <label>Repeat password </label>
       <input type="text" class="form-control" formControlName="password2" />
       <div
         *ngIf="getControl.password2.touched && getControl.password2.invalid"
@@ -87,6 +93,10 @@
       >
         <div *ngIf="getControl.password2.errors?.required">
           Password is required.
+        </div>
+
+        <div *ngIf="getControl.password2.errors?.mustMatch">
+          Passwords do NOT match.
         </div>
       </div>
     </div>

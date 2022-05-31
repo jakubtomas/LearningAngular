@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, ValidationErrors, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-formular',
@@ -8,34 +8,80 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, Valid
 })
 export class FormularComponent implements OnInit {
 
-  // userForm: FormGroup;
-  userForm = this.formBuilder.group({
-    name: ['', [Validators.required,
-    Validators.minLength(4),
-    Validators.maxLength(8)]],
+  userForm: FormGroup;
 
-    email: ['', [Validators.required,
-    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-
-    phone: ['', [Validators.required]],
-
-    password: ['', [Validators.required,
-    Validators.minLength(8),
-    this.createPasswordStrengthValidator()]],
-
-    password2: ['', [Validators.required]],
-
-    message: ['', [Validators.required]]
-
-  }
-    , this.passwordMatchValidator // viem poslat objekt
-  )
   constructor(public formBuilder: FormBuilder) {
+    // this.userForm = this.formBuilder.group({
+    //   name: ['', [Validators.required,
+    //   Validators.minLength(4),
+    //   Validators.maxLength(8)]],
 
+    //   email: ['', [Validators.required,
+    //   Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+
+    //   phone: ['', [Validators.required,
+    //   Validators.minLength(10),
+    //   Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
+    //   ]],
+
+    //   password: ['', [
+    //     Validators.required,
+    //     Validators.minLength(8),
+    //     ///  this.createPasswordStrengthValidator()
+    //   ]],
+
+    //   password2: ['', [Validators.required]],
+
+    //   message: ['', [Validators.required]]
+
+    // }
+    //   //, this.passwordMatch('password', 'password2')
+    //   , {
+    //     //validators: this.passwordMatch('password', 'password2') // working
+    //     // validators: this.mustMatch('password', 'password2') // working
+    //     validators: this.passwordMatchValidator // viem poslat objekt
+
+    //   }
+    // );
+
+    // use this
+    this.userForm = new FormGroup(
+      {
+        name: new FormControl('', [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(4),
+          Validators.maxLength(8),
+        ]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.email,
+          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+        ]),
+        phone: new FormControl('', [
+          Validators.required,
+          Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$") // 10 characters
+        ]),
+
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+          this.passwordStrengthValidator()
+        ]),
+        password2: new FormControl('', Validators.required),
+        message: new FormControl('', Validators.required),
+      },
+
+      //this.passwordMatch('password', 'password2') // working
+      {
+        //  validators: this.mustMatch('password', 'password2') // working
+      }
+    );
   }
 
   ngOnInit(): void {
-    this.getControl.message.disable();
+    //  this.getControl.name.disable();
+
     // pre disable nastavi validaciu true ,, je to bez chyby
     // nepouzije validatori
   }
@@ -44,19 +90,12 @@ export class FormularComponent implements OnInit {
     return this.userForm.controls;
   }
 
-  onSubmit(data: any) {
-    console.log('click');
-    console.log(data);
-
-  }
-
-  createPasswordStrengthValidator(): ValidatorFn {
+  private passwordStrengthValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
 
       const value = control.value;
 
       console.log(' Strength Validator value ' + value);
-
 
       if (!value) {
         return null;
@@ -74,11 +113,37 @@ export class FormularComponent implements OnInit {
     }
   }
 
-  private passwordMatchValidator(model: FormGroup): ValidationErrors | null {
+  //passwordMatchValidator(model: FormGroup): ValidationErrors {
+  passwordMatchValidator(model: FormGroup) {
 
     const password = model.get('password');
     const password2 = model.get('password2');
 
+    if (!password || !password2) {
+      return null;
+    }
+
+    if (password2.errors && !password2.errors.mustMatch) {
+      return;
+    }
+
+    // set error on password2 if validation fails
+    if (password.value !== password2.value) {
+      password2.setErrors({ mustMatch: true });
+    } else {
+      password2.setErrors(null);
+    }
+    return null;
+    // };
+  }
+
+
+  // old Validation
+  passwordMatchValidator2(model: FormGroup): ValidationErrors | null {
+    const password = model.get('password');
+    const password2 = model.get('password2');
+
+    console.log('password Match Validator');
     if (!password || !password2) {
       return null;
     }
@@ -92,10 +157,68 @@ export class FormularComponent implements OnInit {
 
       } else {
         password2.setErrors(null);
-        return null;
+        // return null;
       }
     }
 
     return null;
   }
+
+  // mustMatch(controlName: string, matchingControlName: string): ValidatorFn {
+  //   return (formGroup: AbstractControl): { [key: string]: any } | null => {
+  //     const control = formGroup.controls[controlName];
+  //     const matchingControl = formGroup.controls[matchingControlName];
+
+  //     if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+  //       return null;
+  //     }
+
+  //     // set error on matchingControl if validation fails
+  //     if (control.value !== matchingControl.value) {
+  //       matchingControl.setErrors({ mustMatch: true });
+  //       return { mustMatch: true }
+
+  //     } else {
+  //       matchingControl.setErrors(null);
+  //     }
+  //     return null;
+  //   };
+  // }
+
+  // use this
+  // this working but do not forget {validators :}
+  passwordMatch(password: string, confirmPassword: string): ValidatorFn {
+    return (formGroup: AbstractControl): { [key: string]: any } | null => {
+      const passwordControl = formGroup.get(password);
+      const confirmPasswordControl = formGroup.get(confirmPassword);
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (
+        confirmPasswordControl.errors &&
+        !confirmPasswordControl.errors.mustMatch
+      ) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ mustMatch: true });
+        return { mustMatch: true }
+      } else {
+        confirmPasswordControl.setErrors(null);
+        return null;
+      }
+    };
+
+  }
+
+
+  onSubmit(data: any) {
+    console.log('click');
+    console.log(data);
+
+  }
+
 }
