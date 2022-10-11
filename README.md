@@ -1,4 +1,9 @@
-# Ngxs learn, ChangeDetectionStrategy, Reactive Forms , Yee Interceptor but I did not create , Error Handling 
+# Ngxs learn,
+# ChangeDetectionStrategy, 
+# Reactive Forms ,
+# Yee Interceptor but I did not create ,
+# Error Handling 
+# Declarative and Imperative Programming examples with search Parameter , using Rxjs functions 
 
 # Ngxs
 
