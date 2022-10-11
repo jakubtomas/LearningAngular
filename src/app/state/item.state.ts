@@ -28,6 +28,12 @@ export class ItemState {
     return state.items;
   }
 
+  @Selector()
+  static getFilterItems(state: ItemStateModel): Item[] {
+    return state.items.filter(item => item.name)
+    //return state.items.filter(predicate)
+  }
+
   // add Item
   @Action(AddItem)
   add({ getState, patchState }: StateContext<ItemStateModel>, { payload }: AddItem) {

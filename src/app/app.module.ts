@@ -22,6 +22,9 @@ import { FruitComponent } from './components/fruits/fruit/fruit.component';
 import { FormComponent } from './components/form/form.component';
 import { FormularComponent } from './components/form-module/formular/formular.component';
 import { FormModuleModule } from './components/form-module/form-module.module';
+import { SmeFormComponent } from './components/sme-form/sme-form.component';
+import { ImperativeComponent } from './components/imperative/imperative.component';
+import { DeclarativeComponent } from './components/declarative/declarative.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { FormModuleModule } from './components/form-module/form-module.module';
     FruitsComponent,
     FruitComponent,
     FormComponent,
-    // FormModuleModule
+    SmeFormComponent,
+    ImperativeComponent,
+    DeclarativeComponent,
+    //FormModuleModule
     //FormularComponent
   ],
   imports: [

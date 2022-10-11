@@ -211,9 +211,7 @@ export class FormularComponent implements OnInit {
         return null;
       }
     };
-
   }
-
 
   onSubmit(data: any) {
     console.log('click');

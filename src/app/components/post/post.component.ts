@@ -27,10 +27,7 @@ export class PostComponent implements OnInit {
   addPost(nubmer: string) {
     console.log(nubmer);
     this.store.dispatch(new GetPost(1))
-
   }
-
-
   // poznamka pripad pouzitia reaktivneho programovanie
   // pipe  odchytavanie chyb
 
