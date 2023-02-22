@@ -1,5 +1,5 @@
 <div class="parent">
-  <p>Demo Parent component</p>
+  <p>Demo PARENT component</p>
 
   {{ triggerParent() }}
 
@@ -7,5 +7,12 @@
 
   <br />
   <br />
-  <demo-child></demo-child>
+
+  <p>list of items </p>
+
+  <ul>
+    <li *ngFor="let item of items">{{item}}</li>
+  </ul>
+
+  <demo-child [item]="currentItem" (newItemEvent)="addItem($event)"></demo-child>
 </div>

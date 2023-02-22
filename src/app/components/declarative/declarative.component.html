@@ -2,9 +2,11 @@
   <h2 class="mb-5 text-center">Declarative.component.html</h2>
 
   <input type="text" class="form-control" [formControl]="searchField" />
+  <h1>{{console.log('sposob dva')}}</h1>
 
-  <ul *ngFor="let user of filterUsers$ | async">
-    <li>{{user.userId}} {{user.name}}</li>
+
+  <ul>
+    <li *ngFor="let user of filterUsers$ | async">{{user.userId}} {{user.name}}</li>
   </ul>
 
 </div>

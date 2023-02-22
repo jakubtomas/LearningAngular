@@ -1,4 +1,23 @@
 <div class="child">
-  <p>demo-child works!</p>
   {{ triggerChild() }}
+
+  <label for="item-input">Add an item:</label>
+  <input type="text" id="item-input" #newItem (keydown.enter)="addNewItem(newItem.value)">
+  <button type="button" (click)="addNewItem(newItem.value)">Add to parent's list</button>
+  <br>
+
+
+  <p>
+    Today's item: {{item}}
+  </p>
+
+  <div class="instruction">
+    <em>INSTRUCTION</em>
+    <p>DEMO CHILD COMPONENT</p>
+    <p>@outpuT EVENT EMITTER </p>
+    <p>keydown enter on input </p>
+
+    <p>{{result}}</p>
+
+  </div>
 </div>

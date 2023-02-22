@@ -9,8 +9,11 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 
 export class DemoChComponent implements OnInit {
   carsArray: string[] = [];
+  items = ['item1', 'item2', 'item3', 'item4'];
+  currentItem = 'Television';
+
   constructor(private cd: ChangeDetectorRef) {
-    this.cd.detach(); //2
+    //this.cd.detach(); //2
   }
 
   ngOnInit(): void {
@@ -25,11 +28,18 @@ export class DemoChComponent implements OnInit {
     }, 2000)
   }
 
-
-
   triggerParent() {
     console.log('Demo Parent Component');
-
   }
+
+  addItem(newItem: string) {
+    console.log(newItem);
+
+    this.items.push(newItem);
+  }
+
+
+
+
 
 }

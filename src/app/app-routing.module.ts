@@ -11,6 +11,7 @@ import { FruitsComponent } from './components/fruits/fruits.component';
 import { ImperativeComponent } from './components/imperative/imperative.component';
 import { PostComponent } from './components/post/post.component';
 import { SmeFormComponent } from './components/sme-form/sme-form.component';
+import { StreamComponent } from './components/stream/stream.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
 
   { path: 'imperative', component: ImperativeComponent },
   { path: 'declarative', component: DeclarativeComponent },
+  { path: 'stream', component: StreamComponent },
 ];
 
 @NgModule({
