@@ -1,30 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-
   userForm: FormGroup;
 
   constructor() {
     this.userForm = new FormGroup(
       {
-        email: new FormControl('', [
-          Validators.required,
-          Validators.email,
-        ]),
+        email: new FormControl('', [Validators.required, Validators.email]),
 
         password: new FormControl('', [
           Validators.required,
           Validators.minLength(6),
-
         ]),
         password2: new FormControl('', Validators.required),
-      },
+        message: new FormControl('', []),
+      }
 
       // this.passwordMatchValidator
 
@@ -34,7 +35,7 @@ export class RegistrationComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   get getControl() {
     return this.userForm.controls;
@@ -45,11 +46,8 @@ export class RegistrationComponent implements OnInit {
   //   // const password = model.get('password');
   //   // const password2 = model.get('password2');
 
-
   //   const password = this.getControl.password.value;
   //   const password2 = this.getControl.password2.value;
-
-
 
   //   if (password.dirty || password2.dirty) {
 
@@ -72,5 +70,4 @@ export class RegistrationComponent implements OnInit {
 
     console.log(this.userForm);
   }
-
 }

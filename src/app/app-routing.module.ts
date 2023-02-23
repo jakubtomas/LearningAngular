@@ -13,6 +13,7 @@ import { PostComponent } from './components/post/post.component';
 import { SmeFormComponent } from './components/sme-form/sme-form.component';
 import { StreamComponent } from './components/stream/stream.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'form', component: FormComponent },
 
   { path: 'formular', component: FormularComponent },
+  { path: 'templateDriven', component: TemplateDrivenFormComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'formArray', component: FormArrayComponent },
   { path: 'formArrayTwo', component: FarrayTwoComponent },
@@ -36,6 +38,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

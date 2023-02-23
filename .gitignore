@@ -10,6 +10,8 @@
 # dependencies
 /node_modules
 
+#ignore update angular files webpack
+/.angular
 # profiling files
 chrome-profiler-events*.json
 

@@ -26,6 +26,7 @@ import { SmeFormComponent } from './components/sme-form/sme-form.component';
 import { ImperativeComponent } from './components/imperative/imperative.component';
 import { DeclarativeComponent } from './components/declarative/declarative.component';
 import { StreamComponent } from './components/stream/stream.component';
+import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { StreamComponent } from './components/stream/stream.component';
     ImperativeComponent,
     DeclarativeComponent,
     StreamComponent,
+    TemplateDrivenFormComponent,
     //FormModuleModule
     //FormularComponent
   ],
