@@ -9,6 +9,8 @@
  </p>
 
  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" novalidate>
+  value : {{ userForm | json }}
+  <br />
   <div class="form-group">
    <label>Name</label>
    <input type="text" class="form-control" formControlName="name" />
@@ -16,6 +18,9 @@
    <div
     *ngIf="getControl.name.touched && getControl.name.invalid"
     class="text-danger">
+    <!-- iba iny pristup ako vypisovat  chyby a metadata  ,, problem with null  -->
+    <!-- <div *ngIf="getName.invalid && getName.touched">Invalid and touched</div> -->
+    <!--  -->
     <div *ngIf="getControl.name.errors?.required">Name is required.</div>
     <div *ngIf="getControl.name.errors?.maxlength">Maximum character is 8.</div>
     <div *ngIf="getControl.name.errors?.minlength">

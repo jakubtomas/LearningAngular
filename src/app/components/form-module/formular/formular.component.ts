@@ -6,13 +6,13 @@ import {
   ValidatorFn,
   AbstractControl,
   ValidationErrors,
-  FormControl,
+  FormControl
 } from '@angular/forms';
 
 @Component({
   selector: 'app-formular',
   templateUrl: './formular.component.html',
-  styleUrls: ['./formular.component.css'],
+  styleUrls: ['./formular.component.css']
 })
 export class FormularComponent implements OnInit {
   userForm: FormGroup;
@@ -57,31 +57,31 @@ export class FormularComponent implements OnInit {
         name: new FormControl('', [
           Validators.required,
           Validators.minLength(4),
-          Validators.maxLength(8),
+          Validators.maxLength(8)
         ]),
         email: new FormControl('', [
           Validators.required,
           Validators.email,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
         ]),
         phone: new FormControl('', [
           Validators.required,
-          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), // 10 characters
+          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$') // 10 characters
         ]),
 
         password: new FormControl('', [
           Validators.required,
           Validators.minLength(8),
-          this.passwordStrengthValidator(),
+          this.passwordStrengthValidator()
         ]),
         password2: new FormControl('', Validators.required),
-        message: new FormControl('', Validators.required),
+        message: new FormControl('', Validators.required)
       },
 
       //this.passwordMatch('password', 'password2') // also working
 
       {
-        validators: this.passwordMatch('password', 'password2'), // working
+        validators: this.passwordMatch('password', 'password2') // working
       }
     );
   }
@@ -94,6 +94,13 @@ export class FormularComponent implements OnInit {
 
   get getControl() {
     return this.userForm.controls;
+  }
+
+  // iny sposob  ako sa dostat k hodnotam
+  // mozno vyskusat vsetky funkcie ktore ponuka userForm, FormGroup
+
+  get getName() {
+    return this.userForm.get('name');
   }
 
   private passwordStrengthValidator(): ValidatorFn {
