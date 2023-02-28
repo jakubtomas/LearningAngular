@@ -24,7 +24,7 @@
   "singleQuote": true,
   "bracketSameLine": true,
   "closingbracketSameLine": true,
-  "printWidth": 80,
+  "printWidth": 75,
   "bracketSpacing": true,
   "arrowParens": "always",
   "embeddedLanguageFormatting": "auto",

@@ -27,6 +27,10 @@ import { ImperativeComponent } from './components/imperative/imperative.componen
 import { DeclarativeComponent } from './components/declarative/declarative.component';
 import { StreamComponent } from './components/stream/stream.component';
 import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { Form1Component } from './components/stepper/form1/form1.component';
+import { Form2Component } from './components/stepper/form2/form2.component';
+import { Form3Component } from './components/stepper/form3/form3.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,10 @@ import { TemplateDrivenFormComponent } from './template-driven-form/template-dri
     DeclarativeComponent,
     StreamComponent,
     TemplateDrivenFormComponent,
+    StepperComponent,
+    Form1Component,
+    Form2Component,
+    Form3Component,
     //FormModuleModule
     //FormularComponent
   ],

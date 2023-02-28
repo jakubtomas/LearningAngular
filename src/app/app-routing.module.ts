@@ -11,6 +11,7 @@ import { FruitsComponent } from './components/fruits/fruits.component';
 import { ImperativeComponent } from './components/imperative/imperative.component';
 import { PostComponent } from './components/post/post.component';
 import { SmeFormComponent } from './components/sme-form/sme-form.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 import { StreamComponent } from './components/stream/stream.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'demo', component: DemoChComponent },
   { path: 'fruits', component: FruitsComponent },
   { path: 'form', component: FormComponent },
+  { path: 'stepper', component: StepperComponent },
 
   { path: 'formular', component: FormularComponent },
   { path: 'templateDriven', component: TemplateDrivenFormComponent },
@@ -33,11 +35,11 @@ const routes: Routes = [
 
   { path: 'imperative', component: ImperativeComponent },
   { path: 'declarative', component: DeclarativeComponent },
-  { path: 'stream', component: StreamComponent },
+  { path: 'stream', component: StreamComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

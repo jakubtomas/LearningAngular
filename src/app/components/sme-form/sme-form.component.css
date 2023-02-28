@@ -1,0 +1,57 @@
+td {
+  border: 1px solid #efefff;
+}
+th,
+td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.list-group-item {
+  padding: 0;
+}
+
+.active {
+  border-radius: 2px;
+}
+.card-header {
+  padding: 0.5rem 1.5rem;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 3.5rem;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.page-header {
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0 0 1.5rem;
+  -ms-flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+  min-height: 50px;
+}
+
+.breadcrumb-item a {
+  color: #132c62;
+}
+.card-body-navigation {
+  padding: 0;
+}
+.card-footer {
+  background: #e8eaf0;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+}
+.card-footer p {
+  margin: 4px 0;
+}
+.products-window {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  max-width: 85vw;
+  height: auto;
+  z-index: 9999 !important;
+}

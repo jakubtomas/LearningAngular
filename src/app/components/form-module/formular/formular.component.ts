@@ -224,5 +224,11 @@ export class FormularComponent implements OnInit {
   onSubmit(data: FormGroup) {
     console.log('click');
     console.log(data);
+
+    console.log('userForm');
+    console.log('userForm');
+    console.log(this.userForm);
+    console.log('////');
+    console.log(data);
   }
 }
