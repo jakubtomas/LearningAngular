@@ -1,4 +1,5 @@
 <div class="content">
+ {{ userForm.value | json }}
  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" novalidate>
   <br />
   <div class="form-group">
@@ -12,9 +13,7 @@
     <!-- <div *ngIf="getName.invalid && getName.touched">Invalid and touched</div> -->
     <!--  -->
     <div *ngIf="getControl.name.errors?.required">Name is required.</div>
-    <div *ngIf="getControl.name.errors?.maxlength">
-     Maximum character is 8.
-    </div>
+    <div *ngIf="getControl.name.errors?.maxlength">Maximum character is 8.</div>
     <div *ngIf="getControl.name.errors?.minlength">
      Minimum 4 character are srequired.
     </div>
@@ -35,6 +34,19 @@
    </div>
   </div>
 
+  <div class="col-sm-6">
+   <p>Select countries</p>
+   <div *ngFor="let country of countries; let i = index">
+    <input
+     type="checkbox"
+     formArrayName="selectedCountries"
+     [value]="country.value"
+     (change)="onCheckboxChange($event)" />
+    {{ country.name }}
+   </div>
+  </div>
+
+  <!--  -->
   <div class="form-group">
    <label>Phone</label>
    <input type="text" class="form-control" formControlName="phone" />

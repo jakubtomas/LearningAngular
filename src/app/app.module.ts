@@ -51,7 +51,7 @@ import { Form3Component } from './components/stepper/form3/form3.component';
     StepperComponent,
     Form1Component,
     Form2Component,
-    Form3Component,
+    Form3Component
     //FormModuleModule
     //FormularComponent
   ],
@@ -73,6 +73,4 @@ import { Form3Component } from './components/stepper/form3/form3.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule {}
