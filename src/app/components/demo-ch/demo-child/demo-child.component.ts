@@ -3,28 +3,22 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'demo-child',
   templateUrl: './demo-child.component.html',
-  styleUrls: ['./demo-child.component.css']
+  styleUrls: ['./demo-child.component.css'],
 })
 export class DemoChildComponent implements OnInit {
-
-
   @Input() amount: number = 3.5155;
   @Input() currencyCode: string = '$';
   // amount = 4
-  value = "S"
-  result = ''
+  value = 'S';
+  result = '';
 
   @Input() item = ''; // decorate the property with @Input()
 
   //DEMO CHILD COMPONENT
-  constructor() {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.result = this.currencyCode + this.amount.toFixed(2).toString()
-
-
+    this.result = this.currencyCode + this.amount.toFixed(2).toString();
   }
 
   @Output() newItemEvent = new EventEmitter<string>();
@@ -32,12 +26,7 @@ export class DemoChildComponent implements OnInit {
     this.newItemEvent.emit(value);
   }
 
-
   triggerChild() {
     console.log('Demo Child Component');
-
   }
-
-
-
 }

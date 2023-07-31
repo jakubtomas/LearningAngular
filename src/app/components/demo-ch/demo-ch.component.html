@@ -2,17 +2,18 @@
   <p>Demo PARENT component</p>
 
   {{ triggerParent() }}
-
   <h1>{{ carsArray }}</h1>
 
   <br />
   <br />
-
-  <p>list of items </p>
+  <p>list of items</p>
 
   <ul>
-    <li *ngFor="let item of items">{{item}}</li>
+    <li *ngFor="let item of items">{{ item }}</li>
   </ul>
-
-  <demo-child [item]="currentItem" (newItemEvent)="addItem($event)"></demo-child>
+  <p>-------------demo child component under this line</p>
+  <demo-child
+    [item]="currentItem"
+    (newItemEvent)="addItem($event)"
+  ></demo-child>
 </div>

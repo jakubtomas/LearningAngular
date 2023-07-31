@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, ValidationErrors, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
+  FormControl
+} from '@angular/forms';
 
 @Component({
   selector: 'app-formular',
@@ -7,7 +15,6 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, Valid
   styleUrls: ['./formular.component.css']
 })
 export class FormularComponent implements OnInit {
-
   userForm: FormGroup;
 
   constructor(public formBuilder: FormBuilder) {
@@ -49,18 +56,17 @@ export class FormularComponent implements OnInit {
       {
         name: new FormControl('', [
           Validators.required,
-          Validators.email,
           Validators.minLength(4),
-          Validators.maxLength(8),
+          Validators.maxLength(8)
         ]),
         email: new FormControl('', [
           Validators.required,
           Validators.email,
-          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
         ]),
         phone: new FormControl('', [
           Validators.required,
-          Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$") // 10 characters
+          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$') // 10 characters
         ]),
 
         password: new FormControl('', [
@@ -69,19 +75,19 @@ export class FormularComponent implements OnInit {
           this.passwordStrengthValidator()
         ]),
         password2: new FormControl('', Validators.required),
-        message: new FormControl('', Validators.required),
+        message: new FormControl('', Validators.required)
       },
 
-      //this.passwordMatch('password', 'password2') // working
+      //this.passwordMatch('password', 'password2') // also working
+
       {
-        //  validators: this.mustMatch('password', 'password2') // working
+        validators: this.passwordMatch('password', 'password2') // working
       }
     );
   }
 
   ngOnInit(): void {
     //  this.getControl.name.disable();
-
     // pre disable nastavi validaciu true ,, je to bez chyby
     // nepouzije validatori
   }
@@ -90,9 +96,15 @@ export class FormularComponent implements OnInit {
     return this.userForm.controls;
   }
 
+  // iny sposob  ako sa dostat k hodnotam
+  // mozno vyskusat vsetky funkcie ktore ponuka userForm, FormGroup
+
+  get getName() {
+    return this.userForm.get('name');
+  }
+
   private passwordStrengthValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-
       const value = control.value;
 
       console.log(' Strength Validator value ' + value);
@@ -110,12 +122,11 @@ export class FormularComponent implements OnInit {
       const passwordValid = hasUpperCase && hasLowerCase && hasNumeric;
 
       return !passwordValid ? { passwordStrength: true } : null;
-    }
+    };
   }
 
   //passwordMatchValidator(model: FormGroup): ValidationErrors {
   passwordMatchValidator(model: FormGroup) {
-
     const password = model.get('password');
     const password2 = model.get('password2');
 
@@ -137,7 +148,6 @@ export class FormularComponent implements OnInit {
     // };
   }
 
-
   // old Validation
   passwordMatchValidator2(model: FormGroup): ValidationErrors | null {
     const password = model.get('password');
@@ -149,12 +159,10 @@ export class FormularComponent implements OnInit {
     }
 
     if (password.dirty || password2.dirty) {
-
       if (password.value !== password2.value) {
         const errorMismatch = { mismatch: true };
         password2.setErrors(errorMismatch);
         return errorMismatch;
-
       } else {
         password2.setErrors(null);
         // return null;
@@ -205,7 +213,7 @@ export class FormularComponent implements OnInit {
 
       if (passwordControl.value !== confirmPasswordControl.value) {
         confirmPasswordControl.setErrors({ mustMatch: true });
-        return { mustMatch: true }
+        return { mustMatch: true };
       } else {
         confirmPasswordControl.setErrors(null);
         return null;
@@ -213,10 +221,14 @@ export class FormularComponent implements OnInit {
     };
   }
 
-  onSubmit(data: any) {
+  onSubmit(data: FormGroup) {
     console.log('click');
     console.log(data);
 
+    console.log('userForm');
+    console.log('userForm');
+    console.log(this.userForm);
+    console.log('////');
+    console.log(data);
   }
-
 }

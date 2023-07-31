@@ -1,0 +1,33 @@
+<div class="container">
+ <div
+  class="row justify-content-center align-items-center"
+  style="height: 100vh">
+  <div class="col-6">
+   <div class="card">
+    <div class="card-body">
+     <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+      <label for="name">Name:</label>
+      <input
+       type="text"
+       name="name"
+       [(ngModel)]="name"
+       #nameInput="ngModel"
+       required
+       minlength="6" />
+      <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
+       <div *ngIf="nameInput.errors?.required">Name is required.</div>
+       <div *ngIf="nameInput.errors?.minlength">
+        Name must be at least 6 characters long.
+       </div>
+      </div>
+      <br />
+      <label for="email">Email:</label>
+      <input type="email" name="email" [(ngModel)]="email" required />
+
+      <button type="submit">Submit</button>
+     </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>

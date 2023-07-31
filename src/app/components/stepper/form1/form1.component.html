@@ -1,17 +1,7 @@
 <div class="content">
- <h3 class="text-center">Formular.component.html</h3>
- <h4>Reactive form , FormGroup, Form Control, Validator,</h4>
- <p>
-  <a
-   href="https://remotestack.io/angular-reactive-forms-validation-tutorial-example/"
-   >website link</a
-  >
- </p>
-
+ {{ userForm.value | json }}
  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" novalidate>
   <br />
-  {{ userForm.value | json }}
-  {{ userForm.valid }}
   <div class="form-group">
    <label>Name</label>
    <input type="text" class="form-control" formControlName="name" />
@@ -23,9 +13,7 @@
     <!-- <div *ngIf="getName.invalid && getName.touched">Invalid and touched</div> -->
     <!--  -->
     <div *ngIf="getControl.name.errors?.required">Name is required.</div>
-    <div *ngIf="getControl.name.errors?.maxlength">
-     Maximum character is 8.
-    </div>
+    <div *ngIf="getControl.name.errors?.maxlength">Maximum character is 8.</div>
     <div *ngIf="getControl.name.errors?.minlength">
      Minimum 4 character are srequired.
     </div>
@@ -46,6 +34,19 @@
    </div>
   </div>
 
+  <div class="col-sm-6">
+   <p>Select countries</p>
+   <div *ngFor="let country of countries; let i = index">
+    <input
+     type="checkbox"
+     formArrayName="selectedCountries"
+     [value]="country.value"
+     (change)="onCheckboxChange($event)" />
+    {{ country.name }}
+   </div>
+  </div>
+
+  <!--  -->
   <div class="form-group">
    <label>Phone</label>
    <input type="text" class="form-control" formControlName="phone" />
@@ -99,30 +100,15 @@
     </div>
    </div>
   </div>
-
-  <div class="form-group">
-   <label>Message</label>
-   <textarea
-    type="text"
-    class="form-control"
-    formControlName="message"></textarea>
-   <div
-    *ngIf="getControl.message.touched && getControl.message.invalid"
-    class="text-danger">
-    <div *ngIf="getControl.message.errors?.required">
-     Message is required.
-    </div>
-   </div>
+  <div class="text-danger my-2">
+   <p [hidden]="userForm.valid">Potrebne vyplnit Formulár</p>
   </div>
 
-  <div class="text-danger">
-   <p [hidden]="userForm.valid">Nevyplneni Formular</p>
-  </div>
   <button
    [disabled]="!userForm.valid"
    class="btn btn-danger btn-block mt-2"
    type="submit">
-   Submit
+   Next
   </button>
  </form>
 </div>
