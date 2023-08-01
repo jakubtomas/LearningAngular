@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
@@ -12,19 +12,19 @@ import {
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
 
   constructor() {
-    this.userForm = new FormGroup(
+    this.userForm = new UntypedFormGroup(
       {
-        email: new FormControl('', [Validators.required, Validators.email]),
+        email: new UntypedFormControl('', [Validators.required, Validators.email]),
 
-        password: new FormControl('', [
+        password: new UntypedFormControl('', [
           Validators.required,
           Validators.minLength(6),
         ]),
-        password2: new FormControl('', Validators.required),
-        message: new FormControl('', []),
+        password2: new UntypedFormControl('', Validators.required),
+        message: new UntypedFormControl('', []),
       }
 
       // this.passwordMatchValidator

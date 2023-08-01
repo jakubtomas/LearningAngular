@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-farray-two',
@@ -7,9 +7,9 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
   styleUrls: ['./farray-two.component.css'],
 })
 export class FarrayTwoComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     this.form = fb.group({
       name: [],
       street: [],
@@ -23,11 +23,11 @@ export class FarrayTwoComponent implements OnInit {
   getAddressFormArray() {
     //return this.form.get('address') as FormArray;
 
-    return this.form.controls['address'] as FormArray;
+    return this.form.controls['address'] as UntypedFormArray;
   }
 
   addNewAddressGroup() {
-    const add = this.form.get('address') as FormArray;
+    const add = this.form.get('address') as UntypedFormArray;
     add.push(
       this.fb.group({
         street: [],
@@ -37,7 +37,7 @@ export class FarrayTwoComponent implements OnInit {
   }
 
   deleteAddressGroup(index: number) {
-    const add = this.form.get('address') as FormArray;
+    const add = this.form.get('address') as UntypedFormArray;
     add.removeAt(index);
   }
 }

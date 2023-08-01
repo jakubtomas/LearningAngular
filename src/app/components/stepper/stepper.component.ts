@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-stepper',
@@ -22,7 +22,7 @@ export class StepperComponent implements OnInit {
     this.step += 1;
   }
 
-  submitForm1(data: FormGroup) {
+  submitForm1(data: UntypedFormGroup) {
     console.log('dostal som data');
     console.log(data);
   }

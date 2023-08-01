@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
+  UntypedFormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
   Validators,
   ValidatorFn,
   AbstractControl,
   ValidationErrors,
-  FormArray
+  UntypedFormArray
 } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,7 @@ import {
   styleUrls: ['./form-array.component.css']
 })
 export class FormArrayComponent implements OnInit {
-  customerInfo: FormGroup;
+  customerInfo: UntypedFormGroup;
   carsList: string[] = ['VOLVO', 'SKODA', 'BMW'];
 
   countries: Array<any> = [
@@ -27,14 +27,14 @@ export class FormArrayComponent implements OnInit {
     { name: 'Japan', value: 'Japan' }
   ];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     this.customerInfo = this.formBuilder.group({
       firstName: [],
       lastName: [],
       username: [],
       email: [],
       products: this.formBuilder.array([]),
-      selectedCountries: new FormArray([]),
+      selectedCountries: new UntypedFormArray([]),
       // viacero sposobov
       // products: this.formBuilder.array([new FormControl([])]),
 
@@ -53,10 +53,10 @@ export class FormArrayComponent implements OnInit {
     //  this.setDefaultData();
   }
   getProductsFormArray() {
-    return this.customerInfo.controls['products'] as FormArray;
+    return this.customerInfo.controls['products'] as UntypedFormArray;
   }
   getItemsFormArray() {
-    return this.customerInfo.controls['items'] as FormArray;
+    return this.customerInfo.controls['items'] as UntypedFormArray;
   }
 
   onCheckboxChange(event: any) {
@@ -64,10 +64,10 @@ export class FormArrayComponent implements OnInit {
 
     const selectedCountries = this.customerInfo.controls[
       'selectedCountries'
-    ] as FormArray;
+    ] as UntypedFormArray;
 
     if (event.target.checked) {
-      selectedCountries.push(new FormControl(event.target.value));
+      selectedCountries.push(new UntypedFormControl(event.target.value));
     } else {
       const index = selectedCountries.controls.findIndex(
         (x) => x.value === event.target.value
@@ -91,7 +91,7 @@ export class FormArrayComponent implements OnInit {
     console.log(this.products);
     console.log('-------------');
 
-    let products = this.customerInfo.get('products') as FormArray;
+    let products = this.customerInfo.get('products') as UntypedFormArray;
     //this.products
     products.push(
       this.formBuilder.group({
@@ -120,7 +120,7 @@ export class FormArrayComponent implements OnInit {
 
   get products() {
     // this for errro
-    return this.customerInfo.get('products') as FormArray;
+    return this.customerInfo.get('products') as UntypedFormArray;
   }
 
   // get getProductsControls() {

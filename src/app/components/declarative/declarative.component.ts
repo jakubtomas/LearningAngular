@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { delay, map, startWith, takeUntil } from 'rxjs/operators';
 import { DemoService, User } from 'src/app/services/demo.service';
@@ -13,16 +13,16 @@ import { DemoService, User } from 'src/app/services/demo.service';
 export class DeclarativeComponent implements OnInit {
 
 
-  public searchField: FormControl;
+  public searchField: UntypedFormControl;
   public users: User[] | undefined;
   public filterUsers$: Observable<User[]> | undefined;
   public console = console;
 
 
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(public formBuilder: UntypedFormBuilder,
     private demoService: DemoService) {
-    this.searchField = new FormControl('');
+    this.searchField = new UntypedFormControl('');
   }
 
   ngOnInit(): void {

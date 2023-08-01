@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 import { DemoService, User } from 'src/app/services/demo.service';
@@ -12,16 +12,16 @@ import { DemoService, User } from 'src/app/services/demo.service';
 })
 export class ImperativeComponent implements OnInit, OnDestroy {
 
-  public searchField: FormControl;
+  public searchField: UntypedFormControl;
   public users: User[] | undefined;
   public filterUsers: User[] | undefined;
   public console = console;
   // trigger this to unsubsribe observables
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(public formBuilder: UntypedFormBuilder,
     private demoService: DemoService) {
-    this.searchField = new FormControl('');
+    this.searchField = new UntypedFormControl('');
   }
 
   ngOnInit(): void {

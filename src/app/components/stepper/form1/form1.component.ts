@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
-  FormGroup,
-  FormBuilder,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators,
   ValidatorFn,
   AbstractControl,
   ValidationErrors,
-  FormControl,
-  FormArray
+  UntypedFormControl,
+  UntypedFormArray
 } from '@angular/forms';
 
 @Component({
@@ -16,8 +16,8 @@ import {
   styleUrls: ['./form1.component.css']
 })
 export class Form1Component implements OnInit {
-  @Output() submitForm1Event = new EventEmitter<FormGroup>();
-  userForm: FormGroup;
+  @Output() submitForm1Event = new EventEmitter<UntypedFormGroup>();
+  userForm: UntypedFormGroup;
 
   carsList: string[] = ['VOLVO', 'BMW', 'Citroen', 'Tesla'];
 
@@ -27,34 +27,34 @@ export class Form1Component implements OnInit {
     { name: 'USA', value: 'USA' }
   ];
 
-  constructor(public formBuilder: FormBuilder) {
-    this.userForm = new FormGroup(
+  constructor(public formBuilder: UntypedFormBuilder) {
+    this.userForm = new UntypedFormGroup(
       {
-        name: new FormControl('janko', [
+        name: new UntypedFormControl('janko', [
           Validators.required,
           Validators.minLength(4),
           Validators.maxLength(8)
         ]),
-        email: new FormControl('janko@gmail.com', [
+        email: new UntypedFormControl('janko@gmail.com', [
           Validators.required,
           Validators.email,
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
         ]),
 
         //color: new FormControl('', Validators.required),
-        selectedCountries: new FormArray([]),
+        selectedCountries: new UntypedFormArray([]),
 
-        phone: new FormControl('0950488899', [
+        phone: new UntypedFormControl('0950488899', [
           Validators.required,
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$') // 10 characters
         ]),
         //        items: new FormControl([]),
-        password: new FormControl('', [
+        password: new UntypedFormControl('', [
           Validators.required,
           Validators.minLength(8),
           this.passwordStrengthValidator()
         ]),
-        password2: new FormControl('', Validators.required)
+        password2: new UntypedFormControl('', Validators.required)
       },
 
       {
@@ -70,10 +70,10 @@ export class Form1Component implements OnInit {
 
     const selectedCountries = this.userForm.controls[
       'selectedCountries'
-    ] as FormArray;
+    ] as UntypedFormArray;
 
     if (event.target.checked) {
-      selectedCountries.push(new FormControl(event.target.value));
+      selectedCountries.push(new UntypedFormControl(event.target.value));
     } else {
       const index = selectedCountries.controls.findIndex(
         (x) => x.value === event.target.value
@@ -82,7 +82,7 @@ export class Form1Component implements OnInit {
     }
   }
 
-  onSubmit(data: FormGroup) {
+  onSubmit(data: UntypedFormGroup) {
     this.submitForm1Event.emit(data);
     console.log('userForm');
     console.log('userForm');
