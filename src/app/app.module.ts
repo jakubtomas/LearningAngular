@@ -52,10 +52,10 @@ import { Form3Component } from './components/stepper/form3/form3.component';
     Form1Component,
     Form2Component,
     Form3Component
-    //FormModuleModule
     //FormularComponent
   ],
   imports: [
+    FormModuleModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
