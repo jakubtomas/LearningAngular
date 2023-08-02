@@ -1,6 +1,10 @@
 <div class="content">
  <h3 class="text-center">Formular.component.html</h3>
  <h4>Reactive form , FormGroup, Form Control, Validator,</h4>
+ <h5>
+  Treba si poziert ze FormGroup,control su vlastne objektz ktore maju svoje
+  stavy hodnoty a funkcie pomocou pristupujeme k datam potrebne na validaciu atd
+ </h5>
  <p>
   <a
    href="https://remotestack.io/angular-reactive-forms-validation-tutorial-example/"
@@ -16,20 +20,46 @@
    <label>Name</label>
    <input type="text" class="form-control" formControlName="name" />
 
+   <!--  -->
+   <div class="text-danger">touched {{ getControl.name.touched }}</div>
+   <div class="text-danger">untouched {{ getControl.name.untouched }}</div>
+   <div class="text-danger">valid {{ getControl.name.valid }}</div>
+   <div class="text-danger">invalid {{ getControl.name.invalid }}</div>
+   <div class="text-danger">pending {{ getControl.name.pending }}</div>
+   <div class="text-danger">pristine {{ getControl.name.pristine }}</div>
+   <div class="text-danger">dirty {{ getControl.name.dirty }}</div>
+
+   <!--  -->
    <div
-    *ngIf="getControl.name.touched && getControl.name.invalid"
+    *ngIf="
+     (getControl.name.touched || getControl.name.dirty) &&
+     getControl.name.invalid
+    "
     class="text-danger">
     <!-- iba iny pristup ako vypisovat  chyby a metadata  ,, problem with null  -->
     <!-- <div *ngIf="getName.invalid && getName.touched">Invalid and touched</div> -->
     <!--  -->
-    <div *ngIf="getControl.name.errors?.required">Name is required.</div>
+    <!--  below 3 way how to dispaly error , with diffrent conditions -->
+    <div *ngIf="getControl.name.errors?.required">Name is required1.</div>
+    <div *ngIf="getNameErrors?.required">Name is required 2.</div>
+    <div *ngIf="getName?.errors?.required">Name is required 3</div>
+
+    <!--  -->
+    <div *ngIf="getControl.name.errors?.maxlength">Maximum character is 8.</div>
+    <div *ngIf="getName?.errors?.maxlength">
+     Maximum getName character is 8.
+    </div>
     <div *ngIf="getControl.name.errors?.maxlength">
-     Maximum character is 8.
+     Maximum character iss {{ getName?.errors?.maxlength.requiredLength }}. your
+     is {{ getName?.errors?.maxlength.actualLength }}
     </div>
     <div *ngIf="getControl.name.errors?.minlength">
      Minimum 4 character are srequired.
     </div>
    </div>
+
+   <!-- code up , vyskusanie aktualne dlzki retazca , pristupovanie max pozadovanej dlzky
+   -->
   </div>
 
   <div class="form-group">
@@ -109,9 +139,7 @@
    <div
     *ngIf="getControl.message.touched && getControl.message.invalid"
     class="text-danger">
-    <div *ngIf="getControl.message.errors?.required">
-     Message is required.
-    </div>
+    <div *ngIf="getControl.message.errors?.required">Message is required.</div>
    </div>
   </div>
 
@@ -119,7 +147,7 @@
    <p [hidden]="userForm.valid">Nevyplneni Formular</p>
   </div>
   <button
-   [disabled]="!userForm.valid"
+   [disabled]="userForm.invalid"
    class="btn btn-danger btn-block mt-2"
    type="submit">
    Submit

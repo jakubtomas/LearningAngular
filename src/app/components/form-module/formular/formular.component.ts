@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  UntypedFormGroup,
-  UntypedFormBuilder,
+  FormGroup,
+  FormBuilder,
   Validators,
   ValidatorFn,
   AbstractControl,
   ValidationErrors,
-  UntypedFormControl
+  FormControl
 } from '@angular/forms';
 
 @Component({
@@ -15,9 +15,9 @@ import {
   styleUrls: ['./formular.component.css']
 })
 export class FormularComponent implements OnInit {
-  userForm: UntypedFormGroup;
+  userForm: FormGroup;
 
-  constructor(public formBuilder: UntypedFormBuilder) {
+  constructor(public formBuilder: FormBuilder) {
     // this.userForm = this.formBuilder.group({
     //   name: ['', [Validators.required,
     //   Validators.minLength(4),
@@ -52,30 +52,30 @@ export class FormularComponent implements OnInit {
     // );
 
     // use this
-    this.userForm = new UntypedFormGroup(
+    this.userForm = new FormGroup(
       {
-        name: new UntypedFormControl('', [
+        name: new FormControl('', [
           Validators.required,
           Validators.minLength(4),
           Validators.maxLength(8)
         ]),
-        email: new UntypedFormControl('', [
+        email: new FormControl('', [
           Validators.required,
           Validators.email,
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
         ]),
-        phone: new UntypedFormControl('', [
+        phone: new FormControl('', [
           Validators.required,
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$') // 10 characters
         ]),
 
-        password: new UntypedFormControl('', [
+        password: new FormControl('', [
           Validators.required,
           Validators.minLength(8),
           this.passwordStrengthValidator()
         ]),
-        password2: new UntypedFormControl('', Validators.required),
-        message: new UntypedFormControl('', Validators.required)
+        password2: new FormControl('', Validators.required),
+        message: new FormControl('', Validators.required)
       },
 
       //this.passwordMatch('password', 'password2') // also working
@@ -100,7 +100,15 @@ export class FormularComponent implements OnInit {
   // mozno vyskusat vsetky funkcie ktore ponuka userForm, FormGroup
 
   get getName() {
+    console.log('getName ');
+
+    console.log(this.userForm.get('name'));
+
     return this.userForm.get('name');
+  }
+
+  get getNameErrors() {
+    return this.userForm.get('name')?.errors;
   }
 
   private passwordStrengthValidator(): ValidatorFn {
@@ -126,7 +134,7 @@ export class FormularComponent implements OnInit {
   }
 
   //passwordMatchValidator(model: FormGroup): ValidationErrors {
-  passwordMatchValidator(model: UntypedFormGroup) {
+  passwordMatchValidator(model: FormGroup) {
     const password = model.get('password');
     const password2 = model.get('password2');
 
@@ -149,7 +157,7 @@ export class FormularComponent implements OnInit {
   }
 
   // old Validation
-  passwordMatchValidator2(model: UntypedFormGroup): ValidationErrors | null {
+  passwordMatchValidator2(model: FormGroup): ValidationErrors | null {
     const password = model.get('password');
     const password2 = model.get('password2');
 
@@ -221,7 +229,7 @@ export class FormularComponent implements OnInit {
     };
   }
 
-  onSubmit(data: UntypedFormGroup) {
+  onSubmit(data: FormGroup) {
     console.log('click');
     console.log(data);
 
