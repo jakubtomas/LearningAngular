@@ -19,21 +19,36 @@ export class FormArrayComponent implements OnInit {
   customerInfo: FormGroup;
   carsList: string[] = ['VOLVO', 'SKODA', 'BMW'];
 
+  apiData: string[] = ['A','C'];
   countries: Array<any> = [
-    { name: 'India', value: 'india' },
-    { name: 'France', value: 'france' },
-    { name: 'USA', value: 'USA' },
-    { name: 'Germany', value: 'germany' },
-    { name: 'Japan', value: 'Japan' }
+    { name: 'A', value: false , countryId:48 },
+    { name: 'B', value: false , countryId:58 },
+    { name: 'C', value: false , countryId:49 },
+    { name: 'USA', value: false, countryId:74 },
+    { name: 'Japan', value: false , countryId:94 }
   ];
 
+  private updateCountriesStatus() { // change from false to true , same name
+    this.countries = this.countries.map(country => {
+      if (this.apiData.includes(country.name)) {
+        return { ...country, value: true };
+      }
+      return country;
+    });
+  }
+
   constructor(private formBuilder: FormBuilder) {
+
+    this.updateCountriesStatus()
+
     this.customerInfo = this.formBuilder.group({
       firstName: [],
       lastName: [],
       username: [],
       email: [],
       products: this.formBuilder.array([]),
+      //      selectedCountries: this.formBuilder.array([]),
+
       selectedCountries: new FormArray([]),
       // viacero sposobov
       // products: this.formBuilder.array([new FormControl([])]),
@@ -43,37 +58,56 @@ export class FormArrayComponent implements OnInit {
       //   new FormControl('item1'),
       //   new FormControl('item2'),
       //   new FormControl('item3'),
-      //   new FormControl('item4')
       // ])
     });
+
+    // FIRST SET ALL FORM CONTROL TO FORM ARRAY
+    //SECOND DELETE BY countryId
+    // PUSH VALUE INTO FORM ARRAY,, ONLY TRUE CHECBOX
+    this.countries.forEach(country => {
+
+     if (country.value) {
+       this.selectedCountries.push(new FormControl(country.countryId));
+     }
+    });
+
+
     this.setDefaultData();
+  }
+  //GET  FORM ARRAY selected COuntries
+  get selectedCountries(): FormArray {
+    return this.customerInfo.get('selectedCountries') as FormArray;
   }
 
   ngOnInit() {
     //  this.setDefaultData();
   }
-  getProductsFormArray() {
+  getProductsFormArray():FormArray {
     return this.customerInfo.controls['products'] as FormArray;
   }
-  getItemsFormArray() {
+  getItemsFormArray():FormArray {
     return this.customerInfo.controls['items'] as FormArray;
   }
 
-  onCheckboxChange(event: any) {
-    console.log(event);
+  onCheckboxChange(event: any, countryId:number) {
+    const selectedCountries = this.selectedCountries;
 
-    const selectedCountries = this.customerInfo.controls[
-      'selectedCountries'
-    ] as FormArray;
-
+    // CREATE FormControl and push to FormArray
     if (event.target.checked) {
-      selectedCountries.push(new FormControl(event.target.value));
+      selectedCountries.push(new FormControl(countryId));
     } else {
+
+      //DELETE FormControl from FormArray by countryCode
       const index = selectedCountries.controls.findIndex(
-        (x) => x.value === event.target.value
+        (x) => x.value === countryId
       );
-      selectedCountries.removeAt(index);
+      console.log(index );
+
+      if (index !== -1) {
+        this.selectedCountries.removeAt(index);
+      }
     }
+    console.log('new values ', this.customerInfo.controls.selectedCountries.value);
   }
 
   submitForm() {
@@ -102,8 +136,9 @@ export class FormArrayComponent implements OnInit {
   }
 
   createCustomerInfo() {
-    console.log('data is ', this.customerInfo.value);
+    console.log('data is ', this.customerInfo.controls.selectedCountries.value);
     this.customerInfo.markAllAsTouched();
+
   }
 
   setDefaultData() {

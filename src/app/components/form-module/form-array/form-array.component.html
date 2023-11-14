@@ -61,9 +61,9 @@
         <input
          type="checkbox"
          formArrayName="selectedCountries"
-         [value]="country.value"
-         (change)="onCheckboxChange($event)" />
-        {{ country.name }}
+         [checked]="country.value"
+         (change)="onCheckboxChange($event,country.countryId)" />
+        {{ country.name }} {{country.countryId}}
        </div>
       </div>
 
