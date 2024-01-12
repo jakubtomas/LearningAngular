@@ -20,6 +20,9 @@ export class FormArrayComponent implements OnInit {
   carsList: string[] = ['VOLVO', 'SKODA', 'BMW'];
 
   apiData: string[] = ['A', 'C'];
+
+  requestArray:any = []
+
   countries: Array<any> = [
     { name: 'A', value: false, countryId: 48 },
     { name: 'B', value: false, countryId: 58 },
@@ -112,9 +115,6 @@ export class FormArrayComponent implements OnInit {
     );
   }
 
-  submitForm() {
-    console.log(this.customerInfo.value);
-  }
 
   addProduct(name = '', desc = '') {
     // console.log(this.customerInfo);
@@ -137,15 +137,17 @@ export class FormArrayComponent implements OnInit {
     );
   }
 
+
+  submitForm() {
+    console.log(this.customerInfo.value);
+  }
+
   createCustomerInfo() {
     console.log('data is ', this.customerInfo.controls.selectedCountries.value);
     this.customerInfo.markAllAsTouched();
 
-
-
     // CREATE NEW OBJECT FOR REQUEST MOCK
-    const array:any = [];
-
+    this.requestArray = [] // default
     this.products.value.map((item: { name: string; description: string }) => {
       let myObject = {
         key: 'value',
@@ -153,13 +155,15 @@ export class FormArrayComponent implements OnInit {
         description: item.description
       };
 
-      array.push(myObject);
+      this.requestArray.push(myObject);
     });
 
 
-    console.log(array);
+    console.log(this.requestArray);
 
   }
+
+
 
   setDefaultData() {
     this.addProduct('tyre', 'rubber material');
