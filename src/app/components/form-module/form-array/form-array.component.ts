@@ -48,7 +48,6 @@ export class FormArrayComponent implements OnInit {
       username: [],
       email: [],
       products: this.formBuilder.array([]),
-      //      selectedCountries: this.formBuilder.array([]),
 
       selectedCountries: new FormArray([]),
       // viacero sposobov
@@ -88,10 +87,14 @@ export class FormArrayComponent implements OnInit {
   getProductsFormArray(): FormArray {
     return this.customerInfo.controls['products'] as FormArray;
   }
+  getProductsControls(){
+    return this.getProductsFormArray().controls
+  }
   getItemsFormArray(): FormArray {
     return this.customerInfo.controls['items'] as FormArray;
   }
 
+  //click on checbox
   onCheckboxChange(event: any, countryId: number) {
     const selectedCountries = this.selectedCountriesFormArray;
 
@@ -117,15 +120,6 @@ export class FormArrayComponent implements OnInit {
 
 
   addProduct(name = '', desc = '') {
-    // console.log(this.customerInfo);
-    // console.log('/////////');
-    // console.log(this.getControl);
-    // console.log('-------------');
-    // console.log(' konkretni producs ');
-    // console.log(this.getControlsProducts);
-    // console.log('--------get Producs');
-    // console.log(this.products);
-    // console.log('-------------');
 
     let products = this.customerInfo.get('products') as FormArray;
     //this.products
@@ -178,7 +172,6 @@ export class FormArrayComponent implements OnInit {
   }
 
   get products() {
-    // this for errro
     return this.customerInfo.get('products') as FormArray;
   }
 

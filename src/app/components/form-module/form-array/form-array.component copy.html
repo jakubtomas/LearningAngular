@@ -93,11 +93,8 @@
       <div class="card-header">
        <div class="header-container">
         <span class="product-header"> Add Product Information </span>
-        <!--
-
-          *ngIf="countries.length > getProductsFormArray().length"
-         -->
         <button
+         *ngIf="countries.length > getProductsFormArray().length"
          (click)="addProduct()"
          class="btn btn-primary">
          Add product
@@ -129,7 +126,7 @@
               value=""
               required />
 
-             <!--ANOTHER WAY TO DISPAY ERROR -->
+             <!--ANOTHER WAYT TO DISPAY ERROR -->
              <span
               *ngIf="products.controls[i].get('name')?.errors?.required"
               class="validation text-warning"
