@@ -323,4 +323,99 @@ export class FormArrayComponent implements OnInit {
 
   //   this.setSelectedPurpose()
   // })
+
+
+  //next example
+  // Vkladanie FormControlera do FormArray s Async. Validatorom
+
+  playFunctio(){
+    // this.checkboxesInFormArray.push(
+    //   new FormGroup({
+    //     primary: new FormControl<boolean>(false, Validators.required),
+
+    //     purpose_id: new FormControl<number>(purpose.purpose_id, { nonNullable: true, validators: [
+    //       Validators.required],
+    //    asyncValidators: [
+    //     this.existSelectedPurposeValidator()
+    //    ],
+    //  }),
+
+    //     label: new FormControl<string | null>(purpose.label, {
+    //       nonNullable: true,
+    //       validators: [Validators.required],
+    //     }),
+    //     link_label: new FormControl<string | null>(purpose.link_label),
+    //     link_href: new FormControl<string | null>(purpose.link_href),
+    //   })
+    // );
+  }
+
+  // async Validator pre predchazdujuci kod
+
+  // existSelectedPurposeValidator(): AsyncValidatorFn {
+
+  //   return (control: AbstractControl): Observable<ValidationErrors | null> => {
+  //     //console.log('call async validator component ');
+
+  //     const value = control.value;
+
+  //     if (value === 0) {
+  //       return of({ required: true });
+  //     }
+
+  //     //set Timeout with permission fix Recursive Calls this.form.valueChanges which call this validator and validator call this.valueChanges
+  //     setTimeout(() => {
+  //       if (!this.permission) {
+  //         this.permission= true ;
+  //       }
+  //     }, 3000);
+
+  //     this.setSelectedPurpose();
+
+  //     return of(control.value).pipe(
+  //       switchMap((val) => this.existSelectedPurpose(val)),
+  //       map((exists: boolean) => (exists ? { duplicatePurpose: true } : null)),
+  //     );
+  //   };
+  // }
+
+
+
+
+
+  //next priklady prehladene errori v subscribe
+
+  // this.webFormService
+  //     .postSetPurposesToWebForm(requestArray, this.webFormId)
+  //     .pipe(
+  //       tap((response) => {
+  //         console.log('response set Purposes for webForm');
+  //         console.log(response);
+  //       })
+  //     )
+  //     .subscribe((response) => {
+  //       if (!response.success) {
+  //         //ERRORS
+  //         switch (response.error?.status) {
+  //           case 409:
+  //             this.toastsService.error($localize`Primary purpose must be one `);
+  //             break;
+
+  //           case 422:
+  //             this.toastsService.error($localize`Invalid portal request`);
+  //             break;
+  //           case 500:
+  //               this.toastsService.error($localize`Status 500`);
+  //               break;
+
+  //           default:
+  //             this.toastsService.error($localize`Akce selhala. Zkuste to znovu.`);
+  //         }
+  //         return;
+  //       } else {
+  //         //SUCCESS
+  //         this.toastsService.success($localize`Ucel spracovani byl uspesne pridan.`);
+  //       }
+  //     });
+
 }
