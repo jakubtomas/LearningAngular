@@ -31,6 +31,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { Form1Component } from './components/stepper/form1/form1.component';
 import { Form2Component } from './components/stepper/form2/form2.component';
 import { Form3Component } from './components/stepper/form3/form3.component';
+import { HttpCallComponent } from './components/http-call/http-call.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { Form3Component } from './components/stepper/form3/form3.component';
     StepperComponent,
     Form1Component,
     Form2Component,
-    Form3Component
+    Form3Component,
+    HttpCallComponent
     //FormModuleModule
     //FormularComponent
   ],

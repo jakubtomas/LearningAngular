@@ -15,6 +15,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { StreamComponent } from './components/stream/stream.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
+import { HttpCallComponent } from './components/http-call/http-call.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
@@ -35,7 +36,8 @@ const routes: Routes = [
 
   { path: 'imperative', component: ImperativeComponent },
   { path: 'declarative', component: DeclarativeComponent },
-  { path: 'stream', component: StreamComponent }
+  { path: 'stream', component: StreamComponent },
+  { path: 'httpClient', component: HttpCallComponent }
 ];
 
 @NgModule({

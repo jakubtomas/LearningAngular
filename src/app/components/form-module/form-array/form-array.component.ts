@@ -418,4 +418,45 @@ export class FormArrayComponent implements OnInit {
   //       }
   //     });
 
+
+
+
+
+  // uloha vytvor formular s selectBoxami , ale kazdy hodnota zvolena v selectoboxe must be diffrent
+// jedno riesenie , zobrat vsetky hodnoty a porovnat  , vypisat jednoduchu chybu
+
+// druhe riesenie Vytvorit validator kde sa zoberuj vsetky aktualne hodnoty a  porovna sa s hodnotou s FormControlera  a v pripade zhody set Error ,
+// je tam asi problem sa aktualnymi hodnotami, hodnota tam nebude asi aktualne aku som zvolil vo Formulari vo Selectboxe
+
+
+
+//uloha 2 FormControls in FormGroup just basic form  , ak nieco napises do jedneho FormControlera druhy musi mat validator requiered a opacne napisem do 2  tak jednotka requered message alebo validator
+
+// pozor na vymazavanie validator , kedy je to potrebne
+
+
+// ak nastavenie validator v vlastnom validator , vola znova vlastni validator riesil by som to
+// pomocou set timeout 1000 value false
+// iba na 1 sekundu sa vytvori rekurzivna funkcia a potom sa nastavi false a skonci to
+
+// hladaj aj lepsie riesenie , vysusaj ten nefunkcny kod kontrola ci FormControl has validators
+
+// what is doing this code below
+// providers: [
+//   {
+//     provide: NG_VALUE_ACCESSOR,
+//     useExisting: forwardRef(() => TextareaComponent),
+//     multi: true,
+//   },
+//   {
+//     provide: NG_VALIDATORS,
+//     useExisting: forwardRef(() => TextareaComponent),
+//     multi: true,
+//   },
+//   {
+//     provide: SE_INPUT,
+//     useExisting: forwardRef(() => TextareaComponent),
+//     multi: true,
+//   },
+// ]
 }
