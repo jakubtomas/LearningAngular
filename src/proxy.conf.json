@@ -1,0 +1,8 @@
+{
+  "/web-form-preview/*": {
+      "target": "https://account-content.smartemailing.cz/",
+      "secure": true,
+      "changeOrigin": true,
+      "logLevel": "debug"
+  }
+}
