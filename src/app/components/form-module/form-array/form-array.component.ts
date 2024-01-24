@@ -436,7 +436,7 @@ export class FormArrayComponent implements OnInit {
 
 
 // ak nastavenie validator v vlastnom validator , vola znova vlastni validator riesil by som to
-// pomocou set timeout 1000 value false
+// pomocou set timeout 1000 value false // toto sa uz vyriesilo pomocou true false
 // iba na 1 sekundu sa vytvori rekurzivna funkcia a potom sa nastavi false a skonci to
 
 // hladaj aj lepsie riesenie , vysusaj ten nefunkcny kod kontrola ci FormControl has validators
@@ -459,4 +459,116 @@ export class FormArrayComponent implements OnInit {
 //     multi: true,
 //   },
 // ]
+
+
+
+
+
+
+// nastavit validator do FormControlerov v FormArray iba v pripade ak jedna z dvoch hodnot je nastavena
+ updatingValidators = false ;
+
+
+private updateValidators() {
+  if (this.updatingValidators) {
+    return;
+  }
+
+  this.updatingValidators = true;
+  console.log('Nastavujem ');
+
+  const linkTextMainControl = this.form.get('linkTextMain');
+  const linkAddressMainControl = this.form.get('linkAddressMain');
+
+  const isLinkTextMainDirty =
+    linkTextMainControl?.dirty && (linkTextMainControl?.value?.length ?? 0) > 0;
+  const isLinkAddressMainDirty =
+    linkAddressMainControl?.dirty && (linkAddressMainControl?.value?.length ?? 0) > 0;
+
+  if (isLinkTextMainDirty || isLinkAddressMainDirty) {
+    console.log('true condiction ');
+
+    // Set Validators.required on both controls
+    linkTextMainControl?.setValidators([Validators.required]);
+    linkAddressMainControl?.setValidators([Validators.required]);
+
+    linkTextMainControl?.markAsTouched();
+    linkAddressMainControl?.markAsTouched();
+  } else {
+    // Clear Validators.required on both controls
+    linkTextMainControl?.clearValidators();
+    linkAddressMainControl?.clearValidators();
+  }
+  this.form.controls.textBoxMain.markAsTouched();
+
+  linkTextMainControl?.updateValueAndValidity();
+  linkAddressMainControl?.updateValueAndValidity();
+
+  this.updatingValidators = false;
+}
+
+
+
+// nastavenie  validatorov vsetkym FormControl, ktory su vo FormGroup , ktory je in Form Array
+
+//code in constructor
+
+codeInConstructror(){
+  this.form.controls.checboxiesInForm.valueChanges.subscribe((value) => {
+
+    const totalGroups = this.getAllFormGroups().length;
+
+  // Call the updateValidatorsBasedOnCondition function for each form group with condition as true
+  for (let i = 0; i < totalGroups; i++) {
+    this.updateValidatorsBasedOnCondition(i);
+  }
+
+  });
+}
+getAllFormGroups(): FormGroup[] {
+  return this.checkboxFormArray.controls
+    .filter((control) => control instanceof FormGroup)
+    .map((control) => control as FormGroup);
+}
+
+get checkboxFormArray() {
+  return this.form.get('checboxiesInForm') as FormArray;
+}
+
+updateValidatorsBasedOnCondition(index: number): void {
+  if (this.updatingValidators) {
+    return;
+  }
+
+  this.updatingValidators = true;
+
+  const formGroup = this.checkboxFormArray.at(index) as FormGroup;
+
+  // Get the specific FormControls controls.link_href  controls.link_label
+  const linkAddressMainControl = formGroup.get('link_href') as FormControl;
+  const linkTextMainControl = formGroup.get('link_label') as FormControl;
+
+  const isLinkTextMainDirty =
+(linkTextMainControl?.value?.length ?? 0) > 0;
+const isLinkAddressMainDirty =
+  (linkAddressMainControl?.value?.length ?? 0) > 0;
+
+  if (isLinkTextMainDirty || isLinkAddressMainDirty) {
+    linkTextMainControl.setValidators([Validators.required]);
+    linkAddressMainControl.setValidators([Validators.required]);
+  } else {
+    linkTextMainControl.clearValidators();
+    linkAddressMainControl.clearValidators();
+  }
+
+  // Update the validity status
+  linkTextMainControl.updateValueAndValidity();
+  linkAddressMainControl.updateValueAndValidity();
+
+  this.updatingValidators = false;
+
+}
+
+
+
 }
