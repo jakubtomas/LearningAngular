@@ -57,19 +57,23 @@ export class FormArrayComponent implements OnInit {
       products: this.formBuilder.array([]),
 
       selectedCountries: new FormArray([]),
-      // viacero sposobov
+      // vlozenie FC do FA
       // products: this.formBuilder.array([new FormControl([])]),
 
       items: [[]]
       // items: this.formBuilder.array([
       //   new FormControl('item1'),
       //   new FormControl('item2'),
-      //   new FormControl('item3'),
       // ])
     });
 
-    // FIRST SET ALL FORM CONTROL TO FORM ARRAY
-    //SECOND DELETE BY countryId
+    //DO FA pushujem FormControls ale aj FormGroup with FormControls
+    // FormControl môže mať meno alebo iba hodnotu
+    // potom je tam mozno problem pri template vypisani
+
+    // FIRST PUSH ALL FORM CONTROL TO FORM ARRAY
+    //SECOND DELETE BY countryId'
+
     // PUSH VALUE INTO FORM ARRAY,, ONLY TRUE CHECBOX
     this.countries.forEach((country) => {
       // bez validatorov, validacia
@@ -79,6 +83,13 @@ export class FormArrayComponent implements OnInit {
         );
       }
     });
+
+    // DVA MOZNOSTI
+    // aktualne riesenie  , mam 2 premene prva vsetky countries a
+    // potom samostatne selectedCountries kde su iba true checkboxie
+
+    //druha moznost false aj true by som dal do FormArray a filtroval by som true false v pripade onSubmit alebo display seleted items
+
 
     this.setDefaultData();
   }
@@ -92,7 +103,9 @@ export class FormArrayComponent implements OnInit {
   }
 
   getProductsFormArray(): FormArray {
+    // maybe this return this.customerInfo.get('products') as FormArray
     return this.customerInfo.controls['products'] as FormArray;
+
   }
   getProductsControls() {
     return this.getProductsFormArray().controls;
@@ -102,6 +115,7 @@ export class FormArrayComponent implements OnInit {
   }
 
   //click on checbox
+  // push and delete FC from FA in form
   onCheckboxChange(event: any, countryId: number) {
     const selectedCountries = this.selectedCountriesFormArray;
 
@@ -125,13 +139,14 @@ export class FormArrayComponent implements OnInit {
     );
   }
 
+  // add FG with FC to FA
   addProduct(name = '', desc = '') {
     let products = this.customerInfo.get('products') as FormArray;
 
     products.push(
       this.formBuilder.group({
-        name: [name, [Validators.required]],
-        description: [desc, [Validators.required]]
+        name: [name, [Validators.required]], //
+        description: [desc, [Validators.required]] // description is name of FC
       })
     );
   }
@@ -221,6 +236,7 @@ export class FormArrayComponent implements OnInit {
   //POtrebne nastudovat
   // vyberanie FormControlera s FormArray na zaklade idecka a meno FormControlera
   // kontrola ci obsahuje dany object s errorom pre vypis chyby v template
+  // pravdepodobne sa tam v klada FC s menom FC a hodnotou
 
   form = new FormGroup({
     checboxMainPurpose: new FormControl(false, {}),

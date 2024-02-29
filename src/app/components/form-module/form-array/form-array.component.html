@@ -58,11 +58,13 @@
         required />
       </div>
 
-      <div class="col-sm-6">
+      <p>selectedCountries </p>
+      <div class="col-sm-6"
+      formArrayName="selectedCountries"
+      >
        <div *ngFor="let country of countries; let i = index">
         <input
          type="checkbox"
-         formArrayName="selectedCountries"
          [checked]="country.value"
          (change)="onCheckboxChange($event, country.countryId)" />
         {{ country.name }} {{ country.countryId }}
